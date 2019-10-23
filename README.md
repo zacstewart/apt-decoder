@@ -2,15 +2,29 @@
 
 Decode analog, APT signals from the NOAA weather satellites.
 
+## Installation on Linux
+
+    sudo apt install git sox
+    pip install pillow numpy scipy
+    git clone https://github.com/zacstewart/apt-decoder
+    cd apt-decoder
+
 ## Usage
 
-Previously you need to resample your sound file to 20800Hz, then:
+Previously you need to resample your sound file to 20800Hz, and then decode the
+image:
 
-    python apt.py soundfile.wav image_out.png
+    ./resample.sh recording.wav resampled.wav
+    python ./apt.py resampled.wav image_out.png
+
+Images will probably look upside down if the satellite passed from south to
+north instead of north to south. In fact, the following examples are upside
+down.
 
 ## Examples
 
 ![Example image](./examples/example.png)
+![Example image](./examples/example2.png)
 
 ## Alternatives
 
