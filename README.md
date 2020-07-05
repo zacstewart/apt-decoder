@@ -2,20 +2,34 @@
 
 Decode analog, APT signals from the NOAA weather satellites.
 
+Images are decoded from WAV files with a sample rate of 20800Hz. Files can be
+resampled using two methods.
+
 ## Installation on Linux
 
-    sudo apt install git sox
+    sudo apt install git
     pip install pillow numpy scipy
     git clone https://github.com/zacstewart/apt-decoder
     cd apt-decoder
 
+## Resampling
+
+- Method 1: Using a Python script with no additional dependencies.
+
+      cd apt-decoder
+      python3 resample.py recording.wav resampled.wav
+
+- Method 2: Using [SoX](http://sox.sourceforge.net/) and a bash script. This
+  method is faster and filters the signal to improve the quality of the image.
+
+      sudo apt install sox
+      cd apt-decoder
+      ./resample.sh recording.wav resampled.wav
+
 ## Usage
 
-Previously you need to resample your sound file to 20800Hz, and then decode the
-image:
-
-    ./resample.sh recording.wav resampled.wav
-    python ./apt.py resampled.wav image_out.png
+    cd apt-decoder
+    python3 apt.py resampled.wav image_out.png
 
 Images will probably look upside down if the satellite passed from south to
 north instead of north to south. In fact, the following examples are upside
