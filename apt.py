@@ -14,6 +14,11 @@ class APT(object):
         (rate, self.signal) = scipy.io.wavfile.read(filename)
         if rate != self.RATE:
             raise Exception("Resample audio file to {}".format(self.RATE))
+
+        # Keep only one channel if audio is stereo
+        if self.signal.ndim > 1:
+            self.signal = self.signal[:, 0]
+
         truncate = self.RATE * int(len(self.signal) // self.RATE)
         self.signal = self.signal[:truncate]
 
